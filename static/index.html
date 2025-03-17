@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Processor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>File Processor</h1>
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        <div id="fileInputs">
+            <div class="fileInput">
+                <input type="file" name="files" accept=".xlsx,.xls,.pdf" required>
+                <select name="tags" required>
+                    <option value="">Select Tag</option>
+                    <option value="TypeA">Type A (Excel)</option>
+                    <option value="TypeB">Type B (Excel)</option>
+                    <option value="TypeC">Type C (PDF)</option>
+                    <option value="TypeD">Type D (PDF)</option>
+                </select>
+            </div>
+        </div>
+        <button type="button" id="addMore">Add More Files</button>
+        <button type="submit">Upload and Process</button>
+    </form>
+
+    <div id="loading" style="display: none;">
+        Processing... Please wait.
+    </div>
+
+    <div id="downloadLink" style="display: none;">
+        <a href="" download>Download Processed File</a>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
