@@ -4,34 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Processor</title>
+    <!-- Link to Google Fonts for a modern look (Optional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>File Processor</h1>
-    <form id="uploadForm" method="post" enctype="multipart/form-data">
-        <div id="fileInputs">
-            <div class="fileInput">
-                <input type="file" name="files" accept=".xlsx,.xls,.pdf" required>
-                <select name="tags" required>
-                    <option value="">Select Tag</option>
-                    <option value="TypeA">Type A (Excel)</option>
-                    <option value="TypeB">Type B (Excel)</option>
-                    <option value="TypeC">Type C (PDF)</option>
-                    <option value="TypeD">Type D (PDF)</option>
-                </select>
+    <div class="container">
+        <h1>File Processor</h1>
+
+        <form id="uploadForm" method="post" enctype="multipart/form-data">
+            <!-- Year and Quarter Section -->
+            <fieldset class="form-section">
+                <legend>Processing Period</legend>
+                <div class="form-group year-quarter-group">
+                    <div>
+                        <label for="year">Year:</label>
+                        <input type="number" id="year" name="year" min="2000" max="2099" step="1" placeholder="YYYY" required>
+                    </div>
+                    <div>
+                        <label for="quarter">Quarter:</label>
+                        <select id="quarter" name="quarter" required>
+                            <option value="" disabled selected>Select Quarter</option>
+                            <option value="Q1">Q1</option>
+                            <option value="Q2">Q2</option>
+                            <option value="Q3">Q3</option>
+                            <option value="Q4">Q4</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+             <!-- File Inputs Section -->
+            <fieldset class="form-section">
+                <legend>Upload Files</legend>
+                <p>Select files and their corresponding processing types:</p>
+                <div id="fileInputs">
+                    <div class="fileInput">
+                        <input type="file" name="files" accept=".xlsx,.xls,.pdf" required>
+                        <select name="tags" required>
+                            <option value="" disabled selected>Select Tag</option>
+                            <option value="TypeA">Type A (Excel)</option>
+                            <option value="TypeB">Type B (Excel)</option>
+                            <option value="TypeC">Type C (PDF)</option>
+                            <option value="TypeD">Type D (PDF)</option>
+                        </select>
+                        <!-- Add a remove button for dynamically added inputs -->
+                        <!-- <button type="button" class="removeFile" style="display: none;">Remove</button> -->
+                    </div>
+                </div>
+                <button type="button" id="addMore" class="btn btn-secondary">Add More Files</button>
+            </fieldset>
+
+            <!-- Submission Button -->
+            <div class="submit-section">
+                 <button type="submit" class="btn btn-primary">Upload and Process</button>
             </div>
+
+        </form>
+
+        <!-- Status Indicators -->
+        <div id="loading" class="status-indicator" style="display: none;">
+            <div class="spinner"></div> Processing... Please wait.
         </div>
-        <button type="button" id="addMore">Add More Files</button>
-        <button type="submit">Upload and Process</button>
-    </form>
 
-    <div id="loading" style="display: none;">
-        Processing... Please wait.
-    </div>
+        <div id="downloadLink" class="status-indicator" style="display: none;">
+            ✅ Processing complete. <a href="" download>Download Processed File</a>
+        </div>
 
-    <div id="downloadLink" style="display: none;">
-        <a href="" download>Download Processed File</a>
-    </div>
+        <div id="errorDisplay" class="status-indicator error-message" style="display: none;">
+            <!-- Error messages will be inserted here by JS -->
+        </div>
+
+    </div> <!-- /container -->
 
     <script src="/static/script.js"></script>
 </body>

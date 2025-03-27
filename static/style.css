@@ -1,37 +1,282 @@
-body {
-    font-family: sans-serif;
-    margin: 20px;
+/* style.css */
+
+/* --- Variables & Basic Reset --- */
+:root {
+    --bnm-blue-dark: #003366;   /* BNM Primary Blue */
+    --bnm-blue-medium: #005999; /* A slightly lighter blue for accents/hover */
+    --bnm-blue-light: #e6f0f7;  /* Very light blue for backgrounds/highlights */
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --border-color: #cccccc;
+    --border-color-light: #dee2e6;
+    --background-light: #f8f9fa;
+    --success-green: #28a745;
+    --danger-red: #dc3545;
+    --secondary-gray: #6c757d;
 }
 
-#fileInputs {
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Modern sans-serif font */
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* --- Container & Layout --- */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: var(--text-light);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: var(--bnm-blue-dark);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* --- Form Styling --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Spacing between form sections */
+}
+
+.form-section {
+    border: 1px solid var(--border-color-light);
+    padding: 20px;
+    border-radius: 6px;
+}
+
+fieldset {
+    border: none; /* Reset default fieldset border */
+    padding: 0;
+    margin: 0;
+}
+
+legend {
+    font-weight: 600;
+    color: var(--bnm-blue-dark);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    padding: 0 5px; /* Give legend text some space */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+input[type="number"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="file"] {
+    padding: 7px 12px; /* Adjust padding for file input */
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--bnm-blue-medium);
+    box-shadow: 0 0 0 2px rgba(0, 89, 153, 0.25); /* Subtle focus ring */
+}
+
+/* Specific layout for year/quarter */
+.year-quarter-group {
+    display: flex;
+    gap: 20px;
+}
+
+.year-quarter-group > div {
+    flex: 1; /* Each part takes equal space */
+}
+
+/* File Input Row Styling */
+#fileInputs p {
     margin-bottom: 10px;
+    color: var(--secondary-gray);
+    font-size: 0.9em;
 }
 
 .fileInput {
-    margin-bottom: 5px;
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Space between file input and select */
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: var(--bnm-blue-light); /* Highlight each file row */
+    border-radius: 4px;
 }
 
-input[type="file"], select {
-    padding: 5px;
-    margin-right: 5px;
+.fileInput input[type="file"] {
+    flex-grow: 1; /* Allow file input to take available space */
+    background-color: var(--text-light); /* White background for input */
 }
 
-button {
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
+.fileInput select {
+    flex-basis: 200px; /* Give select a fixed base width */
+    flex-shrink: 0; /* Prevent select from shrinking */
+    background-color: var(--text-light);
+}
+
+/* --- Button Styling --- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
 }
 
-button:hover {
-    background-color: #3e8e41;
+.btn:hover {
+    transform: translateY(-1px); /* Subtle lift effect */
+}
+
+.btn-primary {
+    background-color: var(--bnm-blue-dark);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--bnm-blue-medium);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-gray);
+    color: var(--text-light);
+    margin-top: 10px; /* Space above Add More button */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.submit-section {
+    text-align: center; /* Center the main submit button */
+    margin-top: 10px;
+}
+
+
+/* --- Status Indicators --- */
+.status-indicator {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
 }
 
 #loading {
-    margin-top: 10px;
+    background-color: var(--bnm-blue-light);
+    color: var(--bnm-blue-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 #downloadLink {
-    margin-top: 10px;
+    background-color: #e9f7ec; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb;
+}
+
+#downloadLink a {
+    color: var(--bnm-blue-dark);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#downloadLink a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb;
+}
+
+/* Simple CSS Spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left-color: var(--bnm-blue-dark);
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Optional: Add remove button styling if you implement it in JS */
+.removeFile {
+    background-color: var(--danger-red);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+.removeFile:hover {
+    background-color: #c82333;
+}
+
+/* Responsive Adjustments (Optional) */
+@media (max-width: 600px) {
+    .year-quarter-group {
+        flex-direction: column; /* Stack year/quarter on small screens */
+        gap: 15px;
+    }
+
+    .fileInput {
+        flex-direction: column; /* Stack file/select on small screens */
+        align-items: stretch;
+    }
+
+    .fileInput select {
+        flex-basis: auto; /* Allow select to take full width */
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
 }
